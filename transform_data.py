@@ -21,13 +21,13 @@ def transform_data(parsed_data_path, output_path):
     scraped_data['title'] = scraped_data['title'].str.lower()
 
     # Transform "price" column
-    # Remove the '$' character and generate a new column named 'price_currency'"
+    # Remove the '$' character
     scraped_data['price'] = scraped_data['price'].str.replace('$', '')
 
     # Cast the data type to a numeric
     scraped_data['price'] = scraped_data['price'].astype(float)
 
-    # Generate new column to store a price currency 
+    # Generate a new column named `price_currency` with the value 'USD'
     scraped_data['price_currency'] = 'USD'
 
     # Rename the columns
