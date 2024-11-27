@@ -1,5 +1,4 @@
-# ***Scraping an E-commerce Website Guide***
-
+# _Scraping an E-commerce Website Guide_
 
 **Hi there, Welcome to learning logs!**
 
@@ -29,7 +28,7 @@ In this guide, I’ll explain the steps I’ve learned to do a web scraping unti
 
 Here's the workflow I followed while building this project:
 
-![project workflow]()
+![scraping-worfklow](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/web-scraping-design.png)
 
 ---
 ---
@@ -58,7 +57,7 @@ Here's the workflow I followed while building this project:
     - Python
 
 - Browser
-  - Microsoft Edge  
+  - Microsoft Edge (for locate the selector)
 
 - Python Libray:
     - Playwright
@@ -101,7 +100,7 @@ This script is designed to extract and save the HTML content from a specified we
   
   For this project, I decided to scrape the items displayed in the "More to Love" section on the homepage.
   
-  ![homepage]()
+  ![homepage](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/homepage.png)
 
 ---
 
@@ -125,7 +124,7 @@ This script is designed to extract and save the HTML content from a specified we
   
   - Click view more until the end of the page
   
-  This workflow will guide the creation of the scraping logic and make the process easier.
+  **This workflow will guide the creation of the scraping logic and make the process easier.**
 
 ---
 
@@ -139,33 +138,47 @@ This script is designed to extract and save the HTML content from a specified we
     
   Here are the selectors I used:  
   
-  - ship_to_selector
+  - ### ship_to
   
     This selector is used to locate the form that allows changing the shipping location.
+
+    ![ship_to_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/ship_to_selector.png)
   
-  - form_content_selector
+  - ### form_content
   
-    This selector is used to locate the location input list 
+    This selector is used to locate the location input list.
+
+    ![form_content_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/form_content_selector.png)
   
-  - fill_input
+  - ### fill_input
   
-    This selector is used to locate the input field for selecting a location. In this project, the items will be retrieved from the "United States" location
+    This selector is used to locate the input field for selecting a location. In this project, the items will be retrieved from the "United States".
+
+    ![fill_input_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/input_selector.png)
    
-  - usa_input 
+  - ### usa_input 
   
     This selector is used to locate "United States" from the country list.
+
+    ![usa_input_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/input_usa_selector.png)
   
-  - save_button
+  - ### save_button
   
-    This selector is used to locate the save button in shipping location form
+    This selector is used to locate the save button in shipping location form.
+
+    ![save_button_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/save_button_selector.png)
   
-  - item_selector
+  - ### all_items
   
-    This selector is used to locate all the main content/items that need to be scraped. 
+    This selector is used to locate all the main content/items that need to be scraped.
+
+     ![items_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/items_selector.png)
   
-  - next_page_button_selector 
+  - ### next_page_button 
   
-    This selector is used to locate the "_Next Page_" or "_Load More Items_" button in the main content section.
+    This selector is used to locate the "_Next Page_" or "_View More Items_" button in the main content section.
+
+    ![next_page_selector](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/next_page_selector.png)
   
 
   **All these selectors are utilized in the scraping script to navigate and extract the required data.**
@@ -216,7 +229,7 @@ To create scraping scripts, I use async Playwright because it allows performing 
                 # Open a new page/tab in the browser
                 page = await browser.new_page()
 
-                ..............  
+                ....... MAIN CODE ......  
       ```
 
 >[!NOTE]
@@ -236,7 +249,7 @@ To create scraping scripts, I use async Playwright because it allows performing 
             # Access the web page and wait until it is fully loaded
             await page.goto(url, wait_until='networkidle', timeout=60000)
 
-            .............. 
+            ....... MAIN CODE ...... 
       ```
 
   - ### Setup the Selector
@@ -256,7 +269,8 @@ To create scraping scripts, I use async Playwright because it allows performing 
             fill_input =  Identify elements by XPath, CSS selectors, or text.
 
             # UNTIL THE LAST SELECTOR
-            .............. 
+      
+            ....... MAIN CODE ...... 
       ```
 
   - ### Create the Main Logic
@@ -270,14 +284,13 @@ To create scraping scripts, I use async Playwright because it allows performing 
 
       ```
         try:
-            ..............
-            ..............
+            ....... MAIN CODE ......
+            ....... MAIN CODE ......
 
             html_content = await page.content()
             with open('DIRECTORY_TO_SAVE_THE_SCRAPED_OUTPUT/SCRAPED_OUTPUT_NAME.html', 'w', encoding='utf-8') as file:
               file.write(html_content)
-
-            ..............
+      
       ``` 
 
   - ### Run the Script
@@ -304,14 +317,24 @@ After successfully scraping the HTML content, the next step is to parse it so th
   - Identify the HTML elements (e.g., tags, attributes, and classes) that contain the information you want to extract. Here are the HTML elements I parsed:
 
     - Get all listing information
+
+      ![get_listing_element](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/get_all_listing.png)
       
     - Get item title
+      
+      ![get_title_element](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/get_title.png)
 
     - Get item price
 
-    - Get item rating
+      ![get_price_element](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/get_price.png)
 
-    - Get item url 
+    - Get item rating
+      
+      ![get_rating_element](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/get_rating.png)
+
+    - Get item url
+      
+      ![get_url_element](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/get_link.png)
   
 - ## Parse the selected element into the script
 
@@ -329,7 +352,7 @@ After successfully scraping the HTML content, the next step is to parse it so th
 
 - ## Save and run the script
 
-  - Convert the parsed HTML data into a DataFrame and save it into a CSV file.
+  - Convert the parsed HTML data into a DataFrame and save it into a CSV file using Pandas.
 
   - Then run the parsing script. 
 
@@ -340,7 +363,7 @@ After successfully scraping the HTML content, the next step is to parse it so th
 - ## Verify the parsed output
 
   - Check the directory specified in your script to confirm the data was parsed and saved correctly.
-    Check here to see the parsed output: [parsed-output]() 
+    Check here to see the parsed output: [parsed-output](https://github.com/Rico-febrian/scraping-ecommerce-website/tree/main/parsed_output) 
 
 ---
 ---
@@ -365,7 +388,7 @@ The final step is to clean and transform the parsed data based on your needs or 
 
 - Reorder columns: Arrange columns as follows: `listing_title`, `price`, `price_currency`, `rating`, `source_url`.
 
-To see how I transformed the data based on the requirements above, check here: [transform-data]()
+To see how I transformed the data based on the requirements above, check here: [transform-data](https://github.com/Rico-febrian/scraping-ecommerce-website/tree/main/transformed_output)
 
 ---
 ---
@@ -373,8 +396,16 @@ To see how I transformed the data based on the requirements above, check here: [
 # Final Result
 
 - ## Scraped Output (HTML file)
+
+  ![scraped-output](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/scraped_output.png)
+  
 - ## Parsed Output (CSV)
+
+  ![parsed-output](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/parsed_output.png)
+  
 - ## Transformed Output (CSV)
+
+  ![transformed-output](https://github.com/Rico-febrian/scraping-ecommerce-website/blob/main/assets/transformed_output.png)
 
 ---
 ---
